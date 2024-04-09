@@ -45,11 +45,11 @@ public class TicTacToe {
             if (checkWin()) {
                 System.out.println("Player " + currentSymbol + " wins!");
                 gameOver = true;
-            } // TODO remiza, pocet obsazenych je 9 a nebo uz nejde vyhrat
-            /*else if (checkDraw()) {
+            } // TODO nelze vyhrat
+            else if (checkDraw()) {
                 System.out.println("It's a draw!");
                 gameOver = true;
-            }*/
+            }
 
             currentSymbol = (currentSymbol == Symbol.X) ? Symbol.O : Symbol.X;
         }
@@ -90,6 +90,17 @@ public class TicTacToe {
 
     private static boolean checkWin() {
         return checkRows() || checkCols() || checkDiagonals();
+    }
+
+    private static boolean checkDraw() {
+        for (int r = 0; r < fields.length; r++) {
+            for (int c = 0; c < fields[r].length; c++) {
+                if (isEmptyField(fields[r][c])) {
+                    return false;
+                }
+            }
+        }
+        return true; // all fields occupied
     }
 
     private static boolean checkRows() {
